@@ -1,0 +1,24 @@
+<h1>Gestion de la Base de donnees</h1>
+<span class="style_cliquable" onclick="javascript:get('/admin/bdd/dump', 'Bdd');javascript:get('/admin/bdd', 'Bdd', '<p class=\'important\'>Sauvegarde effectuee - Mis dans le depot</p>');">Sauvegarder
+le
+blog</span>
+<h2>Liste des tables :</h2>
+<table class="table_results">
+<tr>
+    <th>Nom de la table</th>
+    <th colspan="2">Action</th>
+</tr>
+#for $table in $tables
+<tr>
+    <td>$table</td>
+    <td>
+        <span class="style_cliquable" onclick="javascript:get('/admin/bdd/table/add/$table', 'Bdd')">
+            Ajouter
+        </span>
+        <span class="style_cliquable" onclick="javascript:get('/admin/bdd/table/liste/$table', 'Bdd')">
+            Parcourir
+        </span>
+    </td>
+</tr>
+#end for
+</table>

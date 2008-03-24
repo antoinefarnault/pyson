@@ -1,0 +1,29 @@
+#from pyson.pylib import forms
+<h1>Gestion des roles</h1>
+<span class="style_cliquable" title="Ajouter un Role" onclick="javascript:get('/admin/Role/table/add/Role', 'Role');">Ajouter un role</span>
+<table class="table_results">
+<tr>
+        <th>Nom</th>
+        <th>Groupes</th>
+        <th>Action</th>
+        
+    </tr>
+#for $role in $roles_model:
+    <tr>
+
+        <td>
+           $role.name
+        </td>
+        <td>
+#for $k in $role._groupes
+                $k.nom &nbsp; 
+#end for
+        </td>
+        <td>
+            <span class="style_cliquable" title="Supprimer $role.name" onclick="javascript:get('/admin/Role/table/del/Role/$role.id','Role');get('/admin/Role', 'Role');">Supprimer</span>&nbsp;&nbsp;
+            <span class="style_cliquable" title="Editer $role.name" onclick="javascript:get('/admin/Role/table/mod/Role/$role.id','Role');">Modifier</span>
+        </td>
+        
+    </tr>
+#end for
+</table>

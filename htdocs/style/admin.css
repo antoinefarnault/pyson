@@ -1,0 +1,195 @@
+
+#onglets {
+    min-height:500px;
+}
+
+#onglets div {
+    overflow:auto;
+}
+
+#err_info {
+/*     font-family:monospace; */
+    margin-left:auto;
+    margin-right:auto;
+    width:50em;
+    min-height:5em;
+    margin-bottom:1em;
+    border:1px dashed #78A6F3;
+    padding:2em;
+}
+
+#err_info .titre {
+    font-weight:bold;
+}
+
+#err_info .description {
+    text-indent:1em;
+}
+
+#err_info fieldset{
+/*    border-top: 2px solid red;*/
+    padding:1em;
+    background-color:#f4f4f4;
+
+}
+
+#err_info legend{
+    font-size:1.5em;
+}
+
+img{
+    border:none;
+}
+
+td {
+    vertical-align:middle;
+}
+.style_cliquable{
+    text-decoration:dotted;
+    color:#3B6EBF;
+    cursor:pointer;
+    margin-right:1em;
+}
+.style_cliquable:hover{
+    text-decoration:underline;
+    color:#3B6EBF;
+    cursor:pointer;
+    margin-right:1em;
+}
+.admin td, th {
+/*    text-align:center;*/
+    margin-left:2em;
+    margin-right:2em;
+    padding-left:1em;
+    padding-right:1em;
+}
+
+label {
+    margin-right:0;
+    margin-left:0;
+    padding:0;
+    width:7em;
+}
+
+select {
+    width:11em;
+}
+
+#user_menu, #groupe_menu {
+    font-weight:bold;
+}
+
+textarea {
+    width:50em;
+    height:20em;
+}
+
+#onglets #Users,#Groupe,#Role, #Bdd{
+    padding:1em;
+}
+
+hr{
+    width:50%;
+    border:1px dashed blue;
+}
+
+table.table_results{
+    width:100%;
+    padding: 0px;
+	border-spacing: 0px;
+/*     border:1px solid red; */
+}
+
+table.table_results th{
+    text-align:center;
+    border-bottom:1px solid gray;
+    background:white;
+}
+
+table.table_results td{
+    text-align:center;
+    /*border:1px solid red;*/
+}
+
+table.table_results tr:hover {
+    background-color:#b2ebff;
+}
+
+.toogle{
+    background-color:#ced9e3;
+}
+
+.hidden{
+        visibility:hidden;
+        display:none;
+        height:0px;
+}
+
+.visible{
+        visibility:visible;
+        display:block;
+}
+
+/* specify that we to do when the mouse is on 1 button */
+.retour:hover {
+/*    border: 2px inset;*/
+    cursor:pointer;
+ 
+}
+
+
+
+/*.droite {
+    position:absolute;
+    right:1em;
+}*/
+
+.file_area{
+    float:right;
+    padding:0.5em;
+    font-size:0.9em;
+}
+ 
+.file_area td{
+    padding-right:0.25em;
+    padding-left:0.25em;
+    text-align:center;
+}
+
+
+.mini{
+    font-size:0.8em;
+    color:#3B6EBF
+}
+.important {
+    color:red;
+    font-weight:bold;
+    border: 1px dashed red;
+    background-color:#ffffcc;
+    background:url('/static/htdocs/img/ok.png')
+    background-repeat:no-repeat;
+    background-position:left;
+    padding-right:2em;
+    padding-left:2em;
+    padding-top:1em;
+    padding-bottom:1em;
+    min-width:15em;
+    text-align:center;
+}
+
+fieldset {
+    padding:1em;
+}
+
+dd, dt {
+    margin-top:0.5em;
+    display:block;
+    
+}
+
+label {
+    float:left;
+    display:block;
+    width:10em;
+}
+

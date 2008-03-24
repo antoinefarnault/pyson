@@ -1,0 +1,35 @@
+#import re 
+<h1>Contenu de  <q>$table</q></h1>
+
+<table class="table_results">
+#for $k in $key
+    <th>
+        $k
+    </th>
+#end for
+<th>
+    Action
+</th>
+#for $row in $rows
+<tr>
+#for $k in $key
+        <td>
+        #set text = $row.__dict__['_SO_val_'+$k].replace('<br />', ' ')
+        #set text = $re.sub(r"<([^\s>]+).*?>",r"&lt;\1&gt;" ,$text )
+            $text[:50]
+        #if $len($text) > 50
+            [...]
+        #end if
+        </td>
+#end for
+    <td>
+        <span class="style_cliquable" onclick="javascript:get('/admin/bdd/table/mod/$table/$row.id', 'Bdd'); ">
+            Modifier
+        </span>
+        <span class="style_cliquable" onclick="javascript:get('/admin/bdd/table/del/$table/$row.id', 'Bdd');javascript:get('/admin/bdd/table/liste/$table', 'Bdd')">
+            Supprimer
+        </span>
+    </td>
+</tr>
+#end for
+</table>
