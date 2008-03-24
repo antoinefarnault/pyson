@@ -1,0 +1,119 @@
+#!/usr/bin/env python
+
+import os, sys, shutil, re
+
+pyson_inst_bin = "/usr/bin" # FIXME :: non portable
+
+def _help():
+    return """\nUsage :\n
+    \t * --install <application>  - installe <application>\n
+    \t * --help                   - montre cette aide\n
+    \t * --show                   - donne le repertoire d'installation de pyson\n
+    \t * --uninstall              - desinstaller\n
+    """
+
+def get_pyson_install_dir():
+    """copie les fichiers dans /usr/lib/python{version}/site-packages ou dans le rep ecrit dans le fichier de configuration"""
+    install_dir = None
+    usr_lib_python = None
+  #  for d in os.listdir("/usr/lib/"):
+   #     if re.match("^python2\.[\d]{1}",d):
+    #        usr_lib_python = d
+            #break
+    if '/usr/lib/python2.5' in sys.path:
+        usr_lib_python = 'python2.5'
+    elif '/usr/lib/python2.4' in sys.path:
+	usr_lib_python = 'python2.4'
+    else:
+        print "incapable de determiner le rep d'install"
+
+    if usr_lib_python:
+        install_dir = "/usr/lib/"+usr_lib_python+"/site-packages/pyson"
+    return str(install_dir)
+
+def install(name):
+    try:
+        print "creation de "+name+" :"
+        os.mkdir(name)
+    except:
+        print "impossible de creer "+name
+        pass
+
+    print "\tmanage.py"
+    shutil.copy2(where_pyson_is_installed+"/manage.py","./"+name+"/manage.py")
+    os.chmod(name+"/manage.py", 0755)
+    
+
+    print "\tcontext.py"
+    file_context = open(name+"/context.py","w")
+    file = open(where_pyson_is_installed+"/context.py","r").readlines()
+    for line in file:
+        if re.match("^config_file\s*=\s* ",line):
+            file_context.write("config_file = '"+name+".conf'\n")
+        else:
+            file_context.write(line)
+    
+    print "\t__init__.py"
+    open(name+"/__init__.py","w")
+    
+    print "\t"+name+".conf"
+    shutil.copy2(where_pyson_is_installed+"/conf/pyson.conf","./"+name+"/"+name+".conf")
+    
+    print "\tview.py"
+    file_view     = open(name+"/view.py","w")
+    view_content  = "from pyson.pylib.pyson_view import *\n\n#ajouter ici vos vues\n\n"
+    view_content += "#def hello(environ, start_response):\n"
+    view_content += "#    text_     = \"&copy;Pyson ? C'est bien !!\"\n"
+    view_content += "#    title_      = \"Partiel de Cobol\"\n"
+    view_content += "#    return  render(environ, start_response, 'hello.html', locals())\n\n\n\n\n"
+    file_view.write(view_content)
+    
+    print "\turls.py"
+    file_url    = open(name+"/urls.py","w")
+    url_content = "from pyson.pylib.pyson_urls import *\n# ajouter ici vos urls\n\n\n\n\n\n\n"
+    url_content += "#urls.add('/', GET=view.hello)"
+    file_url.write(url_content)
+    
+    print "\tmodel.py"
+    file_model    = open(name+"/model.py","w")
+    model_content = "from pyson.pylib.pyson_model import *\n#ajouter ici la description de vos tables de la base de donnees\n\n\n\n\n\n\n\n\n\n"
+    file_model.write(model_content)
+    
+    print "\trole.py"
+    shutil.copy2(where_pyson_is_installed+"/role.py","./"+name)
+
+    print "\tformulaire.py"
+    open(name+"/formulaire.py","w")
+    
+    # -------------------------------
+    # copie du repertoire htdocs
+    # --------------------------------
+    print "\t/htdocs/"
+    shutil.copytree(where_pyson_is_installed+"/htdocs","./"+name+"/htdocs")
+
+def uninstall(install_dir):
+    os.system('rm '+install_dir+' -fr')
+    os.system('rm '+pyson_inst_bin+'/pyson -f')
+
+if __name__ == "__main__":
+    
+    if len(sys.argv) <= 1:
+        sys.exit(_help())
+    
+    if '--show' in sys.argv:
+        print get_pyson_install_dir()
+        sys.exit()
+    if ('--install' == sys.argv[1]) & (len(sys.argv)==3):
+        where_pyson_is_installed = get_pyson_install_dir()
+        if not where_pyson_is_installed:
+            print "impossible de determiner ou pyson est installe"
+            sys.exit()
+        sys.path.append(where_pyson_is_installed)
+        install(sys.argv[2])
+        sys.exit()
+    if '--uninstall' in sys.argv:
+        uninstall(get_pyson_install_dir())
+        print "desintalation de pyson effectuee"
+        sys.exit()
+
+    sys.exit(_help())

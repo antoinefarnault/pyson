@@ -1,0 +1,20 @@
+<h1>Ajout de fichiers</h1>
+
+<div id="AnimPost" class="hidden">
+    <img src="/static/htdocs/img/anim.gif" alt="posting" />
+</div>
+
+<form method="POST" action="/admin/file/add" enctype="multipart/form-data" onsubmit="AnimPost()">
+    <label for="file">Fichiers:</label>
+    <input id="file" type="file" name="file" />
+   <!-- <input type="button" value="Ajouter" onclick="javascript:post('/admin/file/add','File',this.form)" />-->
+  <input type="submit" value="Envoyer" />
+</form>
+
+<script type="text/javascript">
+    function AnimPost(){
+        var div = document.getElementById('AnimPost');
+        div.setAttribute("class","visible");
+        return false;
+    }
+</script>

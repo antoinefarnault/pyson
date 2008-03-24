@@ -1,0 +1,89 @@
+-----
+Fichier de documentation de l'installation
+et de l'utilisationde pyson.
+
+Avril 2007
+-----
+
+------------------------------------
+-- Sommaire --
+------------------------------------
+
+-1- Prerequis
+-2- Installation
+-3- Utilisation générales
+
+-----------------------------------
+-- 1- Prerequis --
+-----------------------------------
+Pour utiliser pyson vous devez avoir préalablement installer sur votre système
+
+-1 L'interpreteur python en version 2.4 au moins. [http://python.org]
+-2 Une base de donnee sqlite [http://sqlite.org] ou postresql [http://www.postgresql.org/] ou mysql [http://mysql.org]
+-3 Les modules python suivant :
+    * cheetatTemplate [http://www.cheetahtemplate.org/] dans sa derniere version.
+    * sqlobject [http://sqlobject.org/]
+    * selector [http://lukearno.com/projects/selector/]
+    * psycopg si vous utilisez postgresql
+    * pysqlite si vous utilisez sqlite
+    * wsgiref
+    * resolver
+    * formencode
+    
+Tous ces modules sont disponible sur [http://cheeseshop.python.org/pypi]
+
+---------------------------------
+-- 2- Intsallation --
+---------------------------------
+Une fois pyson telechargé sur [http://pyson.org] decompressez l'archive avec la commande suivante:
+
+---
+tar xzf pyson-<version>.tar.gz
+---
+
+
+
+
+
+ajouter dojo dans le repertoire htdocs (http://dojotoolkit.org)
+puis entrez dans le repertoire pyson-<version>. Lancer alors la commande d'installation suivante en root:
+
+---
+python setup.py
+---
+
+Et c'est tout !
+
+A partir de là, une commande "pyson" est disponible pour créer de nouvelles applications.
+
+----------------------------------
+-- 3- Utilisation --
+----------------------------------
+Pour creer une nouvelle application web utilisant le framework pyson lancer la commande suivante (par exemple pour creer une application nommé "mon_blog"):
+
+---
+pyson --install "mon_blog"
+---
+
+Un repertoire nommé "mon_blog" est créé. Il contient les fichiers et repertoires de bases de votre application.
+
+-1- Editez votre fichier de configuration conf/mon_blog.conf. Renseignez alors le sgbd que vous utilisez, le port sur lequel vous voulez que votre serveur de test ecoute, l'utilisateur pour la bse de donnée et beaucoup d'autre choses...
+
+-2- Initialisez votre base de donnée grace a la commande suivante
+
+---
+python manage.py createdb
+---
+
+-3- Vous pouvez tester l'interface d'administration de votre nouvelle application en lancant la commande suivante :
+
+---
+python manage.py runserver
+---
+
+Connectez vous alors avec votre navigateur favoris (firefox ;-)) sur http://localhost:50555.
+Attention le numero du port est celui que vous avez renseignez dans le fichier de configuration.
+
+Sur cette interface vous pouvez administrer les utilisateurs de votre applications, les groupes et même créer des rôles pour chacun d'eux. Beaucoup d'autres possibilités sont offertes en standard. Apres rien ne vous empeche de faire les votres en editant les fichiers de votre application.
+
+

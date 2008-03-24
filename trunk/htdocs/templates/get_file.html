@@ -1,0 +1,22 @@
+#import os.path, time, mimetypes
+#from pyson.pylib import storage
+## herite du style de file_area
+<table>
+    <th>Fichier</th>
+    <th colspan="2">Action</th>
+#for ($key, $dir) in $files
+#set chemin = $os.path.join("/static", "FilesPool", $storage.file($key))
+#set type = $mimetypes.guess_type($dir)
+        <tr>
+            <td>$dir</td>
+            <td><p class="style_cliquable" onclick="insert_textarea('<a href=\'$chemin/$dir\'>$dir</a>')">Lien</p></td>
+            <td>
+            #if 'image' in $type[0]
+                <p class="style_cliquable" onclick="insert_textarea('<img src=\'$chemin/$dir\' alt=\'$dir\'/>')">Image</p>
+            #else
+---
+            #end if
+            </td>
+    </tr>
+#end for
+</table>

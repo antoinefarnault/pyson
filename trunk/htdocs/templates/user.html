@@ -1,0 +1,46 @@
+#from pyson.pylib import forms
+<h1>Gestion des utilisateurs</h1>
+ <span class="style_cliquable" title="Ajouter un utilisateur" onclick="javascript:get('/admin/Users/table/add/Users', 'Users');">Ajouter un utilisateur</span>
+<form name="user" action="" method="post">
+<table id="users_menu">
+    <tr>
+    <td>
+        Cocher : 
+        <span class="style_cliquable" onclick="GereChkbox('select', 1)">Tous</span>
+        <span class="style_cliquable" onclick="GereChkbox('select', 0)">Aucun</span>
+    </td>
+    <td>
+        <label>$forms.Input(type="radio", name="radio_groupe", value="1", checked="checked") Ajouter</label>
+        <label>$forms.Input(type="radio", name="radio_groupe", value="0") Supprimer</label>  
+        du groupe
+
+        <select name="groupe" width="50" onChange="javascript:hist='/admin/Users';javascript:post('/admin/users/add_del_groupe', 'Users', this.form);">
+        <option></option>
+        $forms.OptGroup(label='Ajouter au groupe')
+        #for $groupe in $groupe_model
+            $forms.Option(label=$groupe.nom)
+            $groupe.id
+            $str($groupe.nom)
+        #end for
+        </select>
+    </td>
+    </tr>
+</table>
+<table class="table_results">
+    <th></th>
+    <th>Utilisateur</th>
+    <th>Action</th>
+#for $user in $users_model:
+    <tr>
+        <td>$forms.Input(onclick="surligne(this)", type="checkbox", name=$user.pseudo, value=$user.id, id="users_"+$user.pseudo)</td>
+        <td><span class="style_cliquable" onclick="javascript:get('/admin/Users/$user.id', 'Users')">$user.nom $user.prenom  $user.pseudo</span></td>
+        <td>
+            <span class="style_cliquable" title="Supprimer $user.pseudo" onclick="javascript:get('/admin/table/del/Users/$user.id','Users');get('/admin/Users', 'Users');">Supprimer</span>&nbsp;&nbsp;
+            <span class="style_cliquable" title="Editer $user.pseudo" onclick="javascript:get('/admin/Users/table/mod/Users/$user.id','Users');">Modifier</span>
+        </td>
+    </tr>
+#end for
+</table>
+</form>
+
+

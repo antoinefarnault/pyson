@@ -1,0 +1,7 @@
+#if $erreur_
+    Vous n'utilisez pas le middleware de logs.
+#else
+    #for $i in $logs_:
+        $i<br />
+    #end for
+#end if

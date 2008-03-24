@@ -1,0 +1,55 @@
+#from pyson.pylib import forms
+<h1>Gestion des groupes</h1>
+<span class="style_cliquable" title="Ajouter un groupe" onclick="javascript:get('/admin/Groupe/table/add/Groupe', 'Groupe');">Ajouter un groupe</span>
+<form name="groupe" action="" method="post">
+<table id="groupe_menu">
+    <tr>
+    <td>
+        Cocher : 
+        <span class="style_cliquable" onclick="GereChkbox('select', 1)">Tous</span>
+        <span class="style_cliquable" onclick="GereChkbox('select', 0)">Aucun</span>
+    </td>
+    <td>
+        <label>$forms.Input(type="radio", name="radio_role", value="1", checked="checked") Ajouter</label>
+        <label>$forms.Input(type="radio", name="radio_role", value="0") Supprimer</label>  
+        le role
+
+        <select name="Role" width="50" onChange="javascript:hist='/admin/Groupe';javascript:post('/admin/groupes/add_del_role', 'Groupe', this.form);">
+        <option></option>
+        $forms.OptGroup(label='Ajouter le role')
+        #for $role in $roles_model
+                    $forms.Option(label=$role.name)
+        #end for
+        </select>
+    </td>    
+    </tr>
+</table> 
+<table class="table_results">
+<tr>
+        <th></th>
+        <th>Nom</th>
+        <th>Role</th>
+        <th>Action</th>
+</tr>
+#for $groupe in $groupes_model:
+    <tr onclick="surligne();">
+        <td>$forms.Input(onclick="surligne(this)",type="checkbox", name=$groupe.nom,  value=$groupe.id, id="groupes"+$groupe.nom)</td>
+        <td>
+           <span class="style_cliquable" onclick="javascript:get('/admin/Groupe/$groupe.id','Groupe')"> $groupe.nom</span>
+        </td>
+        <td>
+            #for $k in $groupe._roles
+                $k.name &nbsp; 
+            #end for
+        </td>
+        <td>
+            <span class="style_cliquable" title="Supprimer $groupe.nom" onclick="javascript:get('/admin/Groupe/table/del/Groupe/$groupe.id','Groupe');get('/admin/Groupe',
+'Groupe');">Supprimer</span>&nbsp;&nbsp;
+            <span class="style_cliquable" title="Editer $groupe.nom" onclick="javascript:get('/admin/Groupe/table/mod/Groupe/$groupe.id','Groupe');">Modifier</span>
+        
+</td>
+        
+    </tr>
+#end for
+</table>
+</form>

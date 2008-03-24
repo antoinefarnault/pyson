@@ -1,0 +1,26 @@
+<h1>Utilisateur $users_model.pseudo</h1>
+<h2>Infos personnelles</h2>
+<table>
+<caption></caption>
+#for key in $dict_user:
+    <tr>
+        <th>$key : </th>
+        <td>
+            $users_model.__dict__['_SO_val_'+key]
+        </td>
+    </tr>
+#end for
+</table>
+
+<h2>Groupe</h2>
+<ul>
+#for $i in $groupes_model
+    <li>$i.nom
+    #set $roles = $i._roles
+    --> roles : 
+    #for $k in $roles
+       $k.name
+    #end for
+    </li>
+#end for
+</ul>

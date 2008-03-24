@@ -1,0 +1,29 @@
+#import os.path, time
+#from pyson.pylib import storage
+<h1>Gestion du depot de fichiers</h1>
+<span class="style_cliquable" onclick="javascript:get('/admin/file/add','File')">
+    Ajouter un fichier
+</span>
+<table class="table_results">
+    <th>Utilisateur</th>
+    <th>Taille (Ko)</th>
+    <th>Date Creation</th>
+    <th>Fichier</th>
+    <th>Action</th>
+#for ($key, $dir) in $files
+#set user = $key.split('_')
+#set chemin = $os.path.join("/static", "FilesPool", $storage.file($key))
+#set size = $os.path.getsize($os.path.join("FilesPool", $storage.file($key)))
+        <tr>
+            <td>$user[0]</td>
+            <td>$int($size/1024)</td>
+            <td>$time.strftime("%A, %d %b %Y %H:%M", $time.localtime($os.path.getmtime($os.path.join("FilesPool", $storage.file($key)))))</td>
+            <td>$dir</td>
+            <td>
+                <a href="/static/FilesPool/$storage.file($key)/$dir">Telecharger</a>&nbsp;&nbsp;
+                <span class="style_cliquable" title="Supprimer" onclick="javascript:get('/admin/file/del/$key','File');">Supprimer</span>
+                <span class="style_cliquable" titre="chemin" onclick="javascript:window.prompt('Le chemin de $dir :','$chemin');">Chemin</span>
+            </td>
+    </tr>
+#end for
+</table>

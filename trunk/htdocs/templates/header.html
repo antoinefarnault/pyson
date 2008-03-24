@@ -1,0 +1,64 @@
+#encoding UTF-8
+#from pyson.pylib.framelib import get_err_info, context
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>$title_</title>
+<meta http-equiv="Content-Language" content="English" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+#if $context.conf.get('style')
+    <link rel="stylesheet" type="text/css" href="/static/htdocs/style/$context.conf['style']" media="screen" />
+#end if
+#for $style in $style_
+    <link rel="stylesheet" type="text/css" href="/static/htdocs/style/$style" media="screen" />
+#end for
+<link rel="stylesheet" type="text/css" href="/static/htdocs/style/admin.css" media="all"/>
+<script type="text/javascript" src="/static/htdocs/script/getpost.js"></script>
+</head>
+<body>
+<div id="top">
+    <div id="header">
+        <div id="left">
+                <h1> $header_</h1>
+        </div> <!--fin left-->
+    <div id="right">
+#if $environ['session'].has_key('pseudo')
+            <a href="/logout" class="logout">Logout
+            <span>($environ['session']['pseudo'])</span>
+            </a>
+#else 
+            <a href="/login" class="login">Login</a>
+#end if
+        
+    </div> <!--fin right-->
+    
+    </div> <!--fin header-->
+</div> <!-- fin top-->
+
+<div id="container">
+
+<div id="navigation">
+<h2>Navigation</h2>
+        <ul>
+#for ($menu,$link) in $menu_lateral.items()
+        <li><a href="$link" title="$link">$menu</a></li>
+#end for
+        </ul>
+</div>
+#set $err_info = $get_err_info($environ)
+#if $err_info
+            <fieldset id="err_info">
+            <legend>Info</legend>
+            
+#for ($titre, $description) in $err_info
+                <p class="titre">
+                    $titre :
+                </p>
+                <p class="description">
+                    $description
+                </p>
+                <br />
+#end for
+            </fieldset>
+            
+#end if

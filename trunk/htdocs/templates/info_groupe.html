@@ -1,0 +1,23 @@
+<h1>Groupe $groupe_model.nom</h1>
+<h2>Utilisateurs</h2>
+<table>
+#for $key in $users_model
+    <tr>
+        <td>
+            $key.pseudo
+        </td>
+    </tr>
+#end for
+</table>
+
+<h2>Roles</h2>
+<table>
+#for $key in $roles_model
+    <tr>
+        <td>
+            $key.name
+        </td>
+    </tr>
+#end for
+</table>
+
